@@ -1,3 +1,17 @@
+# FakeGPS for [Tesla Android](https://teslaandroid.com/release-notes)
+
+
+Note from ca-dmin:
+
+**The changes are curently not pushed.
+I'm doing some test drives before. Stay tuned.**
+
+
+
+
+# Original notes from Mock my GPS
+
+
 #### [Mock my GPS](https://github.com/warren-bank/Android-Mock-Location)
 
 Android app that mocks the GPS and Network location providers.
