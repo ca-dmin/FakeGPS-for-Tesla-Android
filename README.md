@@ -3,7 +3,7 @@
 
 **The changes are curently not pushed. I'm doing some test drives before. Stay tuned.**
 
-updated 2022-12-12
+updated 2022-12-13
 
 
 # a few words before 
@@ -69,7 +69,7 @@ That's why I used the REST API from [Teslamateapi](https://github.com/tobiasehle
 # Installation and Usage
 
 0) Requirements 
-  - To get the actual location of the vehicle, you need a running Teslamate and [Teslamateapi] (https://github.com/tobiasehlert/teslamateapi). 
+  - To get the actual location of the vehicle, you need a running Teslamate and [Teslamateapi](https://github.com/tobiasehlert/teslamateapi). 
   - Since you don't want to have it open to the internet, you should set up wireguard on Tesla Android. Everything needs to be configured. 
   - Try calling the status API from the browser from Tesla Android. e.g. http://teslamate-change-me:<port>/api/v1/cars/1/status
   - For testing a fixed position or driving simulation, it is not necessary to.
@@ -96,12 +96,13 @@ That's why I used the REST API from [Teslamateapi](https://github.com/tobiasehle
 coming ...
 
 
+# [Mock my GPS](https://github.com/warren-bank/Android-Mock-Location)
 
-# Original README from [Mock my GPS](https://github.com/warren-bank/Android-Mock-Location)
+## Original README 
 
-copy is here: [README Mock-my-GPS.md](README Mock-my-GPS.md)
+a copy is here: [README Mock-my-GPS.md](README%20Mock-my-GPS.md)
 
-# Changes against Mock my GPS
+## Changes against Mock my GPS
 
 - gradle updates
 - removed joystick support
