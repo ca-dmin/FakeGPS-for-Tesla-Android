@@ -8,8 +8,8 @@ updated 2022-12-13
 
 # a few words before 
 
-Since Android Auto [doesn't working very well](https://github.com/tesla-android/issue-tracker/issues/138). I decided to try pure Tesla Android.
-I was missing some apps (described [here](https://github.com/ca-dmin/tesla-android-notes)) and also the apps did not worl well without locations.
+Since Android Auto [doesn't working very well](https://github.com/tesla-android/issue-tracker/issues/138), I decided to try pure Tesla Android.
+I was missing some apps (described [here](https://github.com/ca-dmin/tesla-android-notes)) and also the apps did not work well without locations.
 
 
 I tried a few location spoofing apps.
@@ -45,7 +45,7 @@ Caveats of the proof of concept:
 - many more problems.
 
 
-# doing the right way
+# going the right way
 
 Mhhh. Since the PI4 for Tesla Android doesn't have GPS built in, it can't get signals without doing something.
 
