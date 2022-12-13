@@ -1,129 +1,108 @@
 # FakeGPS for [Tesla Android](https://teslaandroid.com/release-notes)
 
 
-Note from ca-dmin:
+**The changes are curently not pushed. I'm doing some test drives before. Stay tuned.**
 
-**The changes are curently not pushed.
-I'm doing some test drives before. Stay tuned.**
-
+updated 2022-12-12
 
 
+# a few words before 
 
-# Original notes from Mock my GPS
+Since Android Auto [doesn't working very well](https://github.com/tesla-android/issue-tracker/issues/138). I decided to try pure Tesla Android.
+I was missing some apps (described [here](https://github.com/ca-dmin/tesla-android-notes)) and also the apps did not worl well without locations.
 
 
-#### [Mock my GPS](https://github.com/warren-bank/Android-Mock-Location)
+I tried a few location spoofing apps.
+Mock my GPS was the only app I could get to work - as well as faking the GPS Signal, which also works with [ABRP](https://abetterrouteplanner.com).
 
-Android app that mocks the GPS and Network location providers.
+But how to get the location of the vehicle? 
+So I forked Mock my GPS as a simple proof of concept.
 
-#### Screenshots
+# Warning
 
-![Mock-my-GPS](./screenshots/1-mainactivity-tab1-fixed-position.png)
-![Mock-my-GPS](./screenshots/2-mainactivity-tab2-trip-simulation.png)
-![Mock-my-GPS](./screenshots/3-preferences.png)
-![Mock-my-GPS](./screenshots/4-bookmarks-add-dialog.png)
-![Mock-my-GPS](./screenshots/5-bookmarks-list.png)
-![Mock-my-GPS](./screenshots/6-bookmarks-open.png)
+I've never coded on an android app before. 
 
-#### Summary
+- So expect ugly code. You've been warned. 
+- There is no error handling either!
+- There is not even an error popup if the REST API could not be reached or returns wrong data
+- ...
+- And many more things that could happen
 
-combination of:
+Any fixes or changes are very welcome - pull request or forking. 
 
-* [FakeTraveler](https://github.com/mcastillof/FakeTraveler)
-* [FakeGPS](https://github.com/xiangtailiang/FakeGPS)
+# proof of concept - nothing more or less
 
-#### Notes
+This repo contains only a proof of concept which I coded on a cold weekend.
 
-* minimum supported version of Android:
-  * Android 1.5 (API level 3)
+It could fake the locations from:
+- a fixed position (like Mock my GPS)
+- a trip simulation (like Mock my GPS, used here for most screenshots)
+- and the location from a REST API - which I used to get the location of the car.
 
-- - - -
+Caveats of the proof of concept:
+- Tesla Android needs to be online and connected all the time!
+- since the position determination takes a long way via "your car -> Tesla mothership -> Teslamate -> Teslamate API -> your car", it is not very accurate
+- many more problems.
 
-#### Comparison of features in existing apps
 
-__FakeTraveler__:
+# doing the right way
 
-* pros:
-  - doesn't require root or system permissions
-    * only requires setting: `Developer > Mock Location`
-  - includes a minimalist map embedded in a webview
-    * nice implementation
-    * static html page w/ 2-way javascript binding
-* cons:
-  - no bookmarks
-  - no geo intent filters
-  - no ability to "wander" from specified lat/lon
+Mhhh. Since the PI4 for Tesla Android doesn't have GPS built in, it can't get signals without doing something.
 
-__FakeGPS__:
+Maybe the approach taken here is total bullsh.... but heh - I learned something and it works (for me).
 
-* pros:
-  - coding is excellent
-  - supports 2 ways to "wander" from specified lat/lon
-    1) buttons (up, down, left, right) that apply a specified offset to current location
-       * accessed via a "joystick" that floats on top of other apps
-    2) "fly to"
-       * user specifies a 2nd location and how much time it should take to travel there (as the crow flies)
-       * recalculates a new intermediate position every 1 second
-  - supports bookmarking geo coordinates
-* cons:
-  - requires root
-  - requires installation as a system app
-  - does _NOT_ use the 'Mock Location' API
-    * hooks directly into low-level APIs
-  - "joystick" overlay is not optional
-    * always visible when GPS location is _fake_
-  - "joystick" overlay includes unnecessary buttons
-  - bookmarks cannot be edited
-  - no good way to push a geo coordinate into the app
-    * no internal webview with map
-    * no geo intent filters
 
-- - - -
+Better options could be:
+- Could Tesla Android's Flutter app fetch the location from the browser in Tesla?
+- If so, could it be the source for the REST API of "FakeGPS for Tesla Android"?
+- Or will the position data be delivered directly to the Android?
 
-#### Design Goals
 
-Combine the best features from all:
+I don't know yet.
+From just one weekend programming for Android , I haven't figured it out :-)
 
-__FakeTraveler__:
 
-* methodology for mocking location (GPS and Network)
+That's why I used the REST API from [Teslamateapi](https://github.com/tobiasehlert/teslamateapi) because it's already running here.
 
-__FakeGPS__:
 
-* overall architecture
-* "joystick" and "fly to"
 
-__OsmAnd__:
+# Installation and Usage
 
-* geo intent filters
+0) Requirements 
+  - To get the actual location of the vehicle, you need a running Teslamate and [Teslamateapi] (https://github.com/tobiasehlert/teslamateapi). 
+  - Since you don't want to have it open to the internet, you should set up wireguard on Tesla Android. Everything needs to be configured. 
+  - Try calling the status API from the browser from Tesla Android. e.g. http://teslamate-change-me:<port>/api/v1/cars/1/status
+  - For testing a fixed position or driving simulation, it is not necessary to.
 
-__other considerations__:
+1) You need to download the app or build it yourself.
 
-* though the embedded map in __FakeTraveler__ is elegant
-  - the geo intent filters make this unnecessary
-    * external mapping software can provide better features
-      - __Google Maps__ can work offline
-      - __OsmAnd__ can work offline
-      - __OsmAnd__ can broadcast geo intents
+2) In order to work, you need to allow "FakeGPS for Android" to mock locations. You have to enable Developer options and select this app in "Settings/System/Developer options/Select mock location app" option.
 
-__other enhancements__:
+3) Launch the app and go to the settings and set up the URL accordingly.
 
-* better bookmarks
-  - save from fields in UI
-  - save from geo intent
-  - add from dialog
-  - edit from list
-* more preferences
-  - frequency at which location providers receive mock updates
-  - duration for which mock updates are sent to location providers each time the "start" button is pressed
-    * `0` holds the special meaning that the duration is indefinite and will continue until the "stop" button is pressed
-  - ability to enable/disable "joystick"
-  - ability to configure the increment value added to lat/lon values each time a "joystick" button is pressed
-  - ability to continue to mock the destination after a trip simulation completes
+![screenshot](./screenshots/preferences.png)
 
-- - - -
 
-#### Legal:
+4) Go to the first tab and press start.
 
-* copyright: [Warren Bank](https://github.com/warren-bank)
-* license: [GPL-2.0](https://www.gnu.org/licenses/old-licenses/gpl-2.0.txt)
+![screenshot](./screenshots/start.png)
+
+5) open any app that queries the location, e.g. [EVMap](https://f-droid.org/packages/net.vonforst.evmap/) and it should be the location of your car (and not somewhere near Dresden if you are not there :-))
+
+
+
+# some more Screenshots
+
+coming ...
+
+
+
+# Original README from [Mock my GPS](https://github.com/warren-bank/Android-Mock-Location)
+
+copy is here: [README Mock-my-GPS.md](README Mock-my-GPS.md)
+
+# Changes against Mock my GPS
+
+- gradle updates
+- removed joystick support
+- added the ugly code for accessing REST API
