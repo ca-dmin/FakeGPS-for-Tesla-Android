@@ -55,7 +55,7 @@ Maybe the approach taken here is total bullsh.... but heh - I learned something 
 Better options could be:
 - Could Tesla Android's Flutter app fetch the location from the browser in Tesla?
 - If so, could it be the source for the REST API of "FakeGPS for Tesla Android"?
-- Or will the position data be delivered directly to the Android?
+- Or will the position data be delivered directly to the Android by Tesla Android/Flutter?
 
 
 I don't know yet.
