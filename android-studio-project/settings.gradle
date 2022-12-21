@@ -1,1 +1,1 @@
-include ':Mock-my-GPS'
+include ':FakeGPS-for-Tesla-Android'
