@@ -4,7 +4,7 @@
 
     <!-- required to mock location -->
     <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION"
-        tools:ignore="MockLocation" />
+        tools:ignore="MockLocation,ProtectedPermissions" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
@@ -115,7 +115,6 @@
             </intent-filter>
             <intent-filter>
                 <data android:scheme="http" android:host="download.osmand.net" android:pathPrefix="/go" />
-                <data android:scheme="http" android:host="download.osmand.net" android:pathPrefix="go" />
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
