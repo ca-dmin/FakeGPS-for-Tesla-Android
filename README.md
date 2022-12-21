@@ -116,6 +116,9 @@ a copy is here: [README Mock-my-GPS.md](README%20Mock-my-GPS.md)
 
 ## Changes against Mock my GPS
 
+- renamed to FakeGPS-for-Tesla-Android
 - gradle updates
 - removed joystick support
 - added the ugly code for accessing REST API
+- changed branch name to work w/ git flow
+- remove translations to avoid confusions with untranslated texts
