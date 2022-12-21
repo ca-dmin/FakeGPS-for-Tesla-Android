@@ -3,7 +3,7 @@
 
 **The changes are curently not pushed. I'm doing some test drives before. Stay tuned.**
 
-updated 2022-12-13
+updated 2022-12-21 - after a few trips
 
 
 # a few words before 
@@ -41,9 +41,12 @@ It could fake the locations from:
 
 Caveats of the proof of concept:
 - Tesla Android needs to be online and connected all the time!
-- since the position determination takes a long way via "your car -> Tesla mothership -> Teslamate -> Teslamate API -> your car", it is not very accurate
+- since the position determination takes a long way via "your car -> Tesla mothership -> Teslamate -> Teslamate API -> your car", it is not very accurate, often about 50 meters offset (depends on speed)
 - many more problems.
 
+Fixes that could be made in the app:
+- speed is not no reported
+- autostart isn't implemented
 
 # going the right way
 
@@ -90,10 +93,19 @@ That's why I used the REST API from [Teslamateapi](https://github.com/tobiasehle
 5) open any app that queries the location, e.g. [EVMap](https://f-droid.org/packages/net.vonforst.evmap/) and it should be the location of your car (and not somewhere near Dresden if you are not there :-))
 
 
-
 # some more Screenshots
 
-coming ...
+## Start in Car
+
+![screenshot](./screenshots/start_in_car.jpg)
+
+## ABPR running
+
+![screenshot](./screenshots/abrp_1.jpg)
+
+## EVMap on a trip somewhere
+
+![screenshot](./screenshots/evmap.jpg)
 
 
 # [Mock my GPS](https://github.com/warren-bank/Android-Mock-Location)
