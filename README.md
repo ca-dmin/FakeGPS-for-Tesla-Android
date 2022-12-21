@@ -1,9 +1,9 @@
 # FakeGPS for [Tesla Android](https://teslaandroid.com/release-notes)
 
+updated 2022-12-21 - after a few trips, pushed the code and let it build
 
-**The changes are curently not pushed. I'm doing some test drives before. Stay tuned.**
+[![Android CI](https://github.com/ca-dmin/FakeGPS-for-Tesla-Android/actions/workflows/android.yml/badge.svg)](https://github.com/ca-dmin/FakeGPS-for-Tesla-Android/actions/workflows/android.yml)
 
-updated 2022-12-21 - after a few trips
 
 
 # a few words before 
