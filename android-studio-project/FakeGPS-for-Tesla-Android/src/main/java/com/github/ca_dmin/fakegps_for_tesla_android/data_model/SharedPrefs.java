@@ -15,7 +15,7 @@ public final class SharedPrefs {
         SharedPreferences sharedPreferences = context.getSharedPreferences(PREFS_FILENAME, Context.MODE_PRIVATE);
         return sharedPreferences;
     }
-g
+
     public static SharedPreferences.Editor getSharedPreferencesEditor(Context context) {
         SharedPreferences sharedPreferences = getSharedPreferences(context);
         SharedPreferences.Editor editor = sharedPreferences.edit();
