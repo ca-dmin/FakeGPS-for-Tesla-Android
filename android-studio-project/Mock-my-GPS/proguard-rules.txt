@@ -1,1 +1,0 @@
--keep class com.github.warren_bank.mock_location.** { *; }
