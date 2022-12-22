@@ -33,7 +33,7 @@ jobs:
     #    path: ./android-studio-project/FakeGPS-for-Tesla-Android/build/outputs/apk/debug/FakeGPS-for-Tesla-Android-debug.apk
     - name: Release debug apk
       uses: softprops/action-gh-release@v1
-      #if: startsWith(github.ref, 'refs/tags/')
+      if: startsWith(github.ref, 'refs/tags/')
       with:
         files: |
           ./android-studio-project/FakeGPS-for-Tesla-Android/build/outputs/apk/debug/FakeGPS-for-Tesla-Android-debug.apk
