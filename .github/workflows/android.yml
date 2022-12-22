@@ -22,13 +22,19 @@ jobs:
 
     - name: Grant execute permission for gradlew
       run: cd android-studio-project && chmod +x gradlew
-    - name: Build with Gradle
+    - name: Build apk
       run: cd android-studio-project && ./gradlew build
     - name: Build debug apk
       run: cd android-studio-project && ./gradlew assembleDebug --stacktrace && find . -name '*.apk'
-    - name: Upload debug apk
-      uses: actions/upload-artifact@v1
+    #- name: Upload debug apk
+    #  uses: actions/upload-artifact@v1
+    #  with:
+    #    name: FakeGPS-for-Tesla-Android-debug
+    #    path: ./android-studio-project/FakeGPS-for-Tesla-Android/build/outputs/apk/debug/FakeGPS-for-Tesla-Android-debug.apk
+    - name: Release debug apk
+      uses: softprops/action-gh-release@v1
+      #if: startsWith(github.ref, 'refs/tags/')
       with:
-        name: FakeGPS-for-Tesla-Android-debug
-        path: ./android-studio-project/FakeGPS-for-Tesla-Android/build/outputs/apk/debug/FakeGPS-for-Tesla-Android-debug.apk
-          
+        files: |
+          ./android-studio-project/FakeGPS-for-Tesla-Android/build/outputs/apk/debug/FakeGPS-for-Tesla-Android-debug.apk
+
