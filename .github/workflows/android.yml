@@ -24,3 +24,11 @@ jobs:
       run: cd android-studio-project && chmod +x gradlew
     - name: Build with Gradle
       run: cd android-studio-project && ./gradlew build
+    - name: Build debug apk
+      run: cd android-studio-project && ./gradlew assembleDebug --stacktrace && find . -name '*.apk'
+    - name: Upload debug apk
+      uses: actions/upload-artifact@v1
+      with:
+        name: FakeGPS-for-Tesla-Android-debug
+        path: ./android-studio-project/FakeGPS-for-Tesla-Android/build/outputs/apk/debug/FakeGPS-for-Tesla-Android-debug.apk
+          
