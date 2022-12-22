@@ -1,9 +1,11 @@
 # FakeGPS for [Tesla Android](https://teslaandroid.com/release-notes)
 
-updated 2022-12-21 - after a few trips, pushed the code and let it build
-
 [![Android CI](https://github.com/ca-dmin/FakeGPS-for-Tesla-Android/actions/workflows/android.yml/badge.svg)](https://github.com/ca-dmin/FakeGPS-for-Tesla-Android/actions/workflows/android.yml)
 
+# Changelog
+
+- 2022-12-22 - added github action and retested the app while driving (works so far)
+- 2022-12-21 - after a few trips, pushed the code and let it build
 
 
 # a few words before 
@@ -77,7 +79,7 @@ That's why I used the REST API from [Teslamateapi](https://github.com/tobiasehle
   - Try calling the status API from the browser from Tesla Android. e.g. http://teslamate-change-me:<port>/api/v1/cars/1/status
   - For testing a fixed position or driving simulation, it is not necessary to.
 
-1) You need to download the app or build it yourself.
+1) You need to download the app or build it yourself. Download from [Release](https://github.com/ca-dmin/FakeGPS-for-Tesla-Android/releases) page.
 
 2) In order to work, you need to allow "FakeGPS for Android" to mock locations. You have to enable Developer options and select this app in "Settings/System/Developer options/Select mock location app" option.
 
@@ -98,10 +100,17 @@ That's why I used the REST API from [Teslamateapi](https://github.com/tobiasehle
 ## Start in Car
 
 ![screenshot](./screenshots/start_in_car.jpg)
+![screenshot](./screenshots/trip_settings_with_maps_running.png)
 
 ## ABPR running
 
 ![screenshot](./screenshots/abrp_1.jpg)
+![screenshot](./screenshots/abrp_2.png)
+
+## Maps working
+
+![screenshot](./screenshots/maps_1.png)
+![screenshot](./screenshots/maps_2.png)
 
 ## EVMap on a trip somewhere
 
