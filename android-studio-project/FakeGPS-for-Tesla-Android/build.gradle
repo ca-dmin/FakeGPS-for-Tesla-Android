@@ -16,6 +16,8 @@ android {
         applicationId "com.github.ca_dmin.fakegps_for_tesla_android"
         versionName project.ext.releaseVersion
         versionCode project.ext.releaseVersionCode
+
+        archivesBaseName += "-$versionName"
     }
 
 

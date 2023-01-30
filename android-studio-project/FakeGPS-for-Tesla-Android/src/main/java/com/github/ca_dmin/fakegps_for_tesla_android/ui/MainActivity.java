@@ -6,10 +6,13 @@ import com.github.ca_dmin.fakegps_for_tesla_android.data_model.LocPoint;
 import com.github.ca_dmin.fakegps_for_tesla_android.data_model.SharedPrefs;
 import com.github.ca_dmin.fakegps_for_tesla_android.service.LocationService;
 
+import android.Manifest;
 import android.app.ActivityGroup;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,6 +20,7 @@ import android.view.View;
 import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import java.util.ArrayList;
 
 public class MainActivity extends ActivityGroup {
@@ -56,10 +60,19 @@ public class MainActivity extends ActivityGroup {
         }
 
         showToast(intent);
+        requestPermissions();
     }
 
     private String getCurrentTabTag(Intent intent) {
         return intent.getStringExtra(getString(R.string.MainActivity_extra_current_tab_tag));
+    }
+
+    private void requestPermissions() {
+        if (Build.VERSION.SDK_INT >= 33) {
+            if (checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(new String[]{Manifest.permission.POST_NOTIFICATIONS}, 0);
+            }
+        }
     }
 
     private void showToast(Intent intent) {
@@ -93,7 +106,7 @@ public class MainActivity extends ActivityGroup {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem menuItem) {
-        switch(menuItem.getItemId()) {
+        switch (menuItem.getItemId()) {
             case R.id.menu_start_preferences: {
                 startPreferences();
                 return true;
@@ -150,19 +163,18 @@ public class MainActivity extends ActivityGroup {
         String tab_2_tag = getString(R.string.MainActivity_tab_2_tag);
 
         String current_tag = tabHost.getCurrentTabTag();
-        View   current_tab = tabHost.getCurrentView();
+        View current_tab = tabHost.getCurrentView();
 
-        TextView origin_view      = null;
+        TextView origin_view = null;
         TextView destination_view = null;
-        LocPoint origin           = null;
-        LocPoint destination      = null;
+        LocPoint origin = null;
+        LocPoint destination = null;
 
         if (current_tag.equals(tab_2_tag)) {
             // TripSimulationActivity
-            origin_view      = (TextView) current_tab.findViewById(R.id.input_trip_origin);
+            origin_view = (TextView) current_tab.findViewById(R.id.input_trip_origin);
             destination_view = (TextView) current_tab.findViewById(R.id.input_trip_destination);
-        }
-        else {
+        } else {
             // FixedPositionActivity
             origin_view = (TextView) current_tab.findViewById(R.id.input_fixed_location);
         }
@@ -197,11 +209,11 @@ public class MainActivity extends ActivityGroup {
 
     private LocPoint getPointFromTextView(TextView view) {
         LocPoint point = null;
-        String text    = view.getText().toString();
+        String text = view.getText().toString();
         try {
             point = new LocPoint(text);
+        } catch (NumberFormatException e) {
         }
-        catch(NumberFormatException e) {}
         return point;
     }
 
