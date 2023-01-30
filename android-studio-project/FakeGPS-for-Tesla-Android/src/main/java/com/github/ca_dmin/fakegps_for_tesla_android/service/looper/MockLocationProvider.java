@@ -4,10 +4,12 @@ package com.github.ca_dmin.fakegps_for_tesla_android.service.looper;
 //   https://github.com/mcastillof/FakeTraveler/blob/v1.6/app/src/main/java/cl/coders/faketraveler/MockLocationProvider.java
 
 import android.content.Context;
+import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.SystemClock;
+
 
 public class MockLocationProvider {
     String providerName;
@@ -30,6 +32,11 @@ public class MockLocationProvider {
         if (Build.VERSION.SDK_INT >= 30) {
             powerUsage = 1;
             accuracy   = 2;
+        }
+
+        if (Build.VERSION.SDK_INT >= 31) {
+            powerUsage = Criteria.POWER_LOW;
+            accuracy   = Criteria.ACCURACY_FINE;
         }
 
         LocationManager lm = (LocationManager) ctx.getSystemService(
