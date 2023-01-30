@@ -7,6 +7,7 @@ import android.content.Context;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
+import android.location.provider.ProviderProperties;
 import android.os.Build;
 import android.os.SystemClock;
 
@@ -30,8 +31,8 @@ public class MockLocationProvider {
         int accuracy   = 5;
 
         if (Build.VERSION.SDK_INT >= 30) {
-            powerUsage = 1;
-            accuracy   = 2;
+            powerUsage = ProviderProperties.POWER_USAGE_LOW;
+            accuracy   = ProviderProperties.ACCURACY_FINE;
         }
 
         LocationManager lm = (LocationManager) ctx.getSystemService(
@@ -39,9 +40,7 @@ public class MockLocationProvider {
         try
         {
             lm.addTestProvider(providerName, false, false, false, false, false,
-                    true, true, Criteria.POWER_LOW, Criteria.ACCURACY_FINE);
-            //lm.addTestProvider(providerName, false, false, false, false, false,
-            //        true, true, powerUsage, accuracy);
+                    true, true, powerUsage, accuracy);
             lm.setTestProviderEnabled(providerName, true);
         } catch(SecurityException e) {
             throw new SecurityException("Not allowed to perform MOCK_LOCATION");
