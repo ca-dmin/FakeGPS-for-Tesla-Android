@@ -34,16 +34,13 @@ public class MockLocationProvider {
             accuracy   = 2;
         }
 
-        if (Build.VERSION.SDK_INT >= 31) {
-            powerUsage = Criteria.POWER_LOW;
-            accuracy   = Criteria.ACCURACY_FINE;
-        }
-
         LocationManager lm = (LocationManager) ctx.getSystemService(
                 Context.LOCATION_SERVICE);
         try
         {
             lm.addTestProvider(providerName, false, false, false, false, false,
+                    true, true, Criteria.POWER_LOW, Criteria.ACCURACY_FINE);
+            //lm.addTestProvider(providerName, false, false, false, false, false,
                     true, true, powerUsage, accuracy);
             lm.setTestProviderEnabled(providerName, true);
         } catch(SecurityException e) {
