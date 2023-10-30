@@ -1,3 +1,6 @@
+Obsolete since 2023.36.1 
+---
+
 # FakeGPS for [Tesla Android](https://teslaandroid.com/release-notes)
 
 [![Android CI](https://github.com/ca-dmin/FakeGPS-for-Tesla-Android/actions/workflows/android.yml/badge.svg)](https://github.com/ca-dmin/FakeGPS-for-Tesla-Android/actions/workflows/android.yml)
